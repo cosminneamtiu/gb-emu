@@ -168,3 +168,13 @@ bool cart_load(char *cart) {
 
     return true;
 }
+
+u8 cart_read(u16 address) {
+    //just ROM ONLY support (for now)
+    return ctx.rom_data[address];
+
+}
+void cart_write(u16 address, u8 value) {
+    //rom only
+    NO_IMPL
+}
