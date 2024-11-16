@@ -278,7 +278,7 @@ instruction instructions[0x100] = {
     // [0xF0] = {},
     // [0xF1] = {},
     // [0xF2] = {},
-    // [0xF3] = {},
+        [0xF3] = {IN_DI}
     // [0xF4] = {},
     // [0xF5] = {},
     // [0xF6] = {},
@@ -295,9 +295,63 @@ instruction instructions[0x100] = {
 };
 
 instruction *instruction_by_opcode(u8 opcode) {
-    if(instructions[opcode].type == IN_NONE) {
-        return NULL;
-    }
     return &instructions[opcode];
 
+}
+
+
+
+char *inst_lookup[] = {
+    "<NONE>",
+    "NOP",
+    "LD",
+    "INC",
+    "DEC",
+    "RLCA",
+    "ADD",
+    "RRCA",
+    "STOP",
+    "RLA",
+    "JR",
+    "RRA",
+    "DAA",
+    "CPL",
+    "SCF",
+    "CCF",
+    "HALT",
+    "ADC",
+    "SUB",
+    "SBC",
+    "AND",
+    "XOR",
+    "OR",
+    "CP",
+    "POP",
+    "JP",
+    "PUSH",
+    "RET",
+    "CB",
+    "CALL",
+    "RETI",
+    "LDH",
+    "JPHL",
+    "DI",
+    "EI",
+    "RST",
+    "IN_ERR",
+    "IN_RLC", 
+    "IN_RRC",
+    "IN_RL", 
+    "IN_RR",
+    "IN_SLA", 
+    "IN_SRA",
+    "IN_SWAP", 
+    "IN_SRL",
+    "IN_BIT", 
+    "IN_RES", 
+    "IN_SET"
+};
+
+char *inst_name(in_type t) {
+    return inst_lookup[t];
 }

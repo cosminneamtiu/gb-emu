@@ -29,6 +29,8 @@ typedef struct{
     bool halted;
     bool stepping;
 
+    bool int_master_enabled;
+
 }cpu_context;
 
 
@@ -37,4 +39,12 @@ bool cpu_step();
 
 
 typedef void (*IN_PROC)(cpu_context *);  //function pointer that returns void and takes in a cpu context
+
+
+
 IN_PROC inst_get_processor(in_type type);
+
+#define CPU_FLAG_Z BIT(ctx->regs.f,7)
+#define CPU_FLAG_C BIT(ctx->regs.f,4)
+
+u16 cpu_read_reg(reg_type rt);
