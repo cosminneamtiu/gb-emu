@@ -2,6 +2,7 @@
 #include <cpu.h>
 
 instruction instructions[0x100] = {
+    //0X00
     [0x00] = {IN_NOP, AM_IMP},
     [0x01] = {IN_LD, AM_R_D16, RT_BC},
     [0x02] = {IN_LD, AM_MR_R, RT_BC,RT_A},
@@ -11,22 +12,24 @@ instruction instructions[0x100] = {
     [0x06] = {IN_LD, AM_R_D8, RT_B},
     [0x07] = {IN_RLCA}, // IDK , MAYBE ITS FINE
     [0x08] = {IN_LD, AM_A16_R, RT_NONE,RT_SP},
-    [0x09] = {},
-    [0x0A] = {},
-    [0x0B] = {},
-    [0x0C] = {},
-    [0x0D] = {},
+    [0x09] = {IN_ADD, AM_R_R, RT_HL, RT_BC},
+    [0x0A] = {IN_LD,AM_R_MR,RT_A,RT_BC},
+    [0x0B] = {IN_DEC,AM_R,RT_BC},
+    [0x0C] = {IN_INC, AM_R, RT_C},
+    [0x0D] = {IN_DEC, AM_R, RT_C},
     [0x0E] = {IN_LD, AM_R_D8, RT_C},
-    [0x0F] = {},
-    [0x10] = {},
-    [0x11] = {},
-    [0x12] = {},
-    [0x13] = {},
-    [0x14] = {},
-    [0x15] = {},
-    [0x16] = {},
-    [0x17] = {},
-    [0x18] = {},
+    [0x0F] = {IN_RRCA},
+
+    //0X10
+    [0x10] = {IN_STOP},
+    [0x11] = {IN_LD, AM_R_D16, RT_DE},
+    [0x12] = {IN_LD, AM_MR_R, RT_DE,RT_A},
+    [0x13] = {IN_INC, AM_R, RT_DE},
+    [0x14] = {IN_INC,AM_R, RT_D},
+    [0x15] = {IN_DEC,AM_R,RT_D},
+    [0x16] = {IN_LD, AM_R_D8, RT_D},
+    [0x17] = {IN_RLA},
+    [0x18] = {IN_JR,AM_D8},
     [0x19] = {},
     [0x1A] = {},
     [0x1B] = {},
@@ -34,15 +37,17 @@ instruction instructions[0x100] = {
     [0x1D] = {},
     [0x1E] = {},
     [0x1F] = {},
+
+    //0X20
     [0x20] = {},
-    [0x21] = {},
-    [0x22] = {},
-    [0x23] = {},
-    [0x24] = {},
-    [0x25] = {},
-    [0x26] = {},
-    [0x27] = {},
-    [0x28] = {},
+    [0x21] = {IN_LD, AM_R_D16, RT_HL},
+    [0x22] = {IN_LD, AM_HLI_R, RT_HL,RT_A},
+    [0x23] = {IN_INC, AM_R, RT_HL},
+    [0x24] = {IN_INC,AM_R, RT_H},
+    [0x25] = {IN_DEC,AM_R,RT_H},
+    [0x26] = {IN_LD, AM_R_D8, RT_H},
+    [0x27] = {IN_DAA},
+    [0x28] = {IN_JR, AM_D8, RT_NONE, RT_NONE, CT_Z},
     [0x29] = {},
     [0x2A] = {},
     [0x2B] = {},
@@ -50,14 +55,16 @@ instruction instructions[0x100] = {
     [0x2D] = {},
     [0x2E] = {},
     [0x2F] = {},
+
+    //0X30
     [0x30] = {},
-    [0x31] = {},
-    [0x32] = {},
-    [0x33] = {},
-    [0x34] = {},
-    [0x35] = {},
-    [0x36] = {},
-    [0x37] = {},
+    [0x31] = {IN_LD, AM_R_D16, RT_SP},
+    [0x32] = {IN_LD, AM_HLD_R, RT_HL,RT_A},
+    [0x33] = {IN_INC, AM_R, RT_SP},
+    [0x34] = {IN_INC,AM_R, RT_HL},
+    [0x35] = {IN_DEC,AM_R,RT_HL},
+    [0x36] = {IN_LD, AM_R_D8, RT_HL},
+    [0x37] = {IN_SCF},
     [0x38] = {},
     [0x39] = {},
     [0x3A] = {},
@@ -66,6 +73,8 @@ instruction instructions[0x100] = {
     [0x3D] = {},
     [0x3E] = {},
     [0x3F] = {},
+
+    //0X40
     [0x40] = {},
     [0x41] = {},
     [0x42] = {},
@@ -82,6 +91,8 @@ instruction instructions[0x100] = {
     [0x4D] = {},
     [0x4E] = {},
     [0x4F] = {},
+
+    //0X50
     [0x50] = {},
     [0x51] = {},
     [0x52] = {},
@@ -98,6 +109,8 @@ instruction instructions[0x100] = {
     [0x5D] = {},
     [0x5E] = {},
     [0x5F] = {},
+
+    //0X60
     [0x60] = {},
     [0x61] = {},
     [0x62] = {},
@@ -114,6 +127,8 @@ instruction instructions[0x100] = {
     [0x6D] = {},
     [0x6E] = {},
     [0x6F] = {},
+
+    //0X70
     [0x70] = {},
     [0x71] = {},
     [0x72] = {},
@@ -130,6 +145,8 @@ instruction instructions[0x100] = {
     [0x7D] = {},
     [0x7E] = {},
     [0x7F] = {},
+
+    //0X80
     [0x80] = {},
     [0x81] = {},
     [0x82] = {},
@@ -146,6 +163,8 @@ instruction instructions[0x100] = {
     [0x8D] = {},
     [0x8E] = {},
     [0x8F] = {},
+
+    //0X90
     [0x90] = {},
     [0x91] = {},
     [0x92] = {},
@@ -162,6 +181,8 @@ instruction instructions[0x100] = {
     [0x9D] = {},
     [0x9E] = {},
     [0x9F] = {},
+
+    //0XA0
     [0xA0] = {},
     [0xA1] = {},
     [0xA2] = {},
@@ -178,6 +199,8 @@ instruction instructions[0x100] = {
     [0xAD] = {},
     [0xAE] = {},
     [0xAF] = {IN_XOR, AM_R, RT_A},
+
+    //0XB0
     [0xB0] = {},
     [0xB1] = {},
     [0xB2] = {},
@@ -194,6 +217,9 @@ instruction instructions[0x100] = {
     [0xBD] = {},
     [0xBE] = {},
     [0xBF] = {},
+
+
+   //0XC0
     [0xC0] = {},
     [0xC1] = {},
     [0xC2] = {},
@@ -210,6 +236,8 @@ instruction instructions[0x100] = {
     [0xCD] = {},
     [0xCE] = {},
     [0xCF] = {},
+
+    //0XD0   
     [0xD0] = {},
     [0xD1] = {},
     [0xD2] = {},
@@ -226,6 +254,7 @@ instruction instructions[0x100] = {
     [0xDD] = {},
     [0xDE] = {},
     [0xDF] = {},
+    //0XE0
     [0xE0] = {},
     [0xE1] = {},
     [0xE2] = {},
@@ -242,6 +271,8 @@ instruction instructions[0x100] = {
     [0xED] = {},
     [0xEE] = {},
     [0xEF] = {},
+
+    //0XF0
     [0xF0] = {},
     [0xF1] = {},
     [0xF2] = {},
