@@ -20,11 +20,12 @@ typedef struct{
     cpu_registers regs;
 
     //current fetch
-    u16 fetch_data;
+    u16 fetched_data;
     u16 mem_dest;
+    bool dest_is_mem;
     u8 cur_opcode;
-    instruction cur_inst;
-    
+    instruction *cur_inst;
+
     bool halted;
     bool stepping;
 
@@ -33,3 +34,7 @@ typedef struct{
 
 void cpu_init();
 bool cpu_step();
+
+
+typedef void (*IN_PROC)(cpu_context *);  //function pointer that returns void and takes in a cpu context
+IN_PROC inst_get_processor(in_type type);

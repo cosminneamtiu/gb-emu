@@ -18,4 +18,4 @@ typedef uint64_t u64;
 
 void delay(u32 ms);
 
-#define NO_IMPL { fprint(stderr, "not implemented yet\n"); exit(-5);}
+#define NO_IMPL { fprintf(stderr, "not implemented yet\n"); exit(-5);}
